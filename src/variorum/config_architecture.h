@@ -218,6 +218,8 @@ struct platform
     /******************************/
     /// @brief Unique family and model for Intel architectures.
     uint64_t *intel_arch;
+    /// @brief Unique family and model for Intel DGPU architectures.
+    uint64_t *intel_dgpu_arch;
     /// @brief Identifier for AMD architecture.
     uint64_t *amd_arch;
     /// @brief Identifier for IBM architecture.

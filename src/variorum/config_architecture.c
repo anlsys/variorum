@@ -19,6 +19,10 @@
 #include <msr_core.h>
 #endif
 
+#ifdef VARIORUM_WITH_INTEL_DGPU
+#include <config_intel_dgpu.h>
+#endif
+
 #ifdef VARIORUM_WITH_IBM
 #include <config_ibm.h>
 #endif
@@ -95,6 +99,9 @@ int variorum_exit()
 #ifdef VARIORUM_WITH_INTEL
     free(g_platform.intel_arch);
 #endif
+#ifdef VARIORUM_WITH_INTEL_DGPU
+    free(g_platform.intel_dgpu_arch);
+#endif
 #ifdef VARIORUM_WITH_IBM
     free(g_platform.ibm_arch);
 #endif
@@ -116,6 +123,9 @@ int variorum_detect_arch(void)
 {
 #ifdef VARIORUM_WITH_INTEL
     g_platform.intel_arch = detect_intel_arch();
+#endif
+#ifdef VARIORUM_WITH_INTEL_DGPU
+    g_platform.intel_dgpu_arch = detect_intel_dgpu_arch();
 #endif
 #ifdef VARIORUM_WITH_IBM
     g_platform.ibm_arch = detect_ibm_arch();
@@ -141,11 +151,12 @@ int variorum_detect_arch(void)
            (*g_platform.amd_arch >> 8) & 0xFF, *g_platform.amd_arch & 0xFF);
 #endif
 
-    if (g_platform.intel_arch   == NULL &&
-        g_platform.ibm_arch     == NULL &&
-        g_platform.nvidia_arch  == NULL &&
-        g_platform.arm_arch     == NULL &&
-        g_platform.amd_arch     == NULL)
+    if (g_platform.intel_arch      == NULL &&
+        g_platform.intel_dgpu_arch == NULL &&
+        g_platform.ibm_arch        == NULL &&
+        g_platform.nvidia_arch     == NULL &&
+        g_platform.arm_arch        == NULL &&
+        g_platform.amd_arch        == NULL)
     {
         variorum_error_handler("No architectures detected", VARIORUM_ERROR_RUNTIME,
                                getenv("HOSTNAME"), __FILE__, __FUNCTION__,
@@ -327,6 +338,9 @@ int variorum_set_func_ptrs()
         return err;
     }
     err = init_msr();
+#endif
+#ifdef VARIORUM_WITH_INTEL_DGPU
+    err = set_intel_dgpu_func_ptrs();
 #endif
 #ifdef VARIORUM_WITH_IBM
     err = set_ibm_func_ptrs();
