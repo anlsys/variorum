@@ -1,6 +1,6 @@
-# Copyright 2022 Lawrence Livermore National Security, LLC, UChicago
-# Argonne, LLC, and other Variorum Project Developers. See the
-# top-level LICENSE file for details.  SPDX-License-Identifier: MIT
+# Copyright 2022 Lawrence Livermore National Security, LLC, and other
+# Variorum Project Developers. See the top-level LICENSE file for
+# details.  SPDX-License-Identifier: MIT
 
 # First check for user-specified APMIDG_DIR
 if(APMIDG_DIR)

@@ -1,6 +1,6 @@
-// Copyright 2019-2021 Lawrence Livermore National Security, LLC,
-// UChicago Argonne, LLC, and other Variorum Project Developers. See
-// the top-level LICENSE file for details.
+// Copyright 2019-2021 Lawrence Livermore National Security, LLC, and
+// other Variorum Project Developers. See the top-level LICENSE file
+// for details.
 //
 // SPDX-License-Identifier: MIT
 
@@ -25,7 +25,7 @@ void initAPMIDG(void)
     apmidg_init(verbose);
 
     m_total_unit_devices = apmidg_getndevs();
-    
+
     /* Collect number of packages and GPUs per package */
     variorum_get_topology(&m_num_package, NULL, NULL);
     m_gpus_per_socket = m_total_unit_devices / m_num_package;
@@ -84,7 +84,7 @@ void get_thermal_data(int chipid, int verbose, FILE *output)
 	double temp_C;
 	int ti = 0; // only report the first temp sensor now
 	apmidg_readtemp(d, ti, &temp_C);
-	
+
 
         if (verbose)
         {
@@ -118,7 +118,7 @@ void get_clocks_data(int chipid, int verbose, FILE *output)
 	int fi = 0; // only report the first freq domain now
 
 	apmidg_readfreq(d, fi, &freq_MHz);
-		    
+
         if (verbose)
         {
             fprintf(output,
@@ -137,4 +137,3 @@ void get_clocks_data(int chipid, int verbose, FILE *output)
         }
     }
 }
-

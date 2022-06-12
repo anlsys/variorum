@@ -12,8 +12,6 @@
 #include <variorum_error.h>
 #include <variorum_timers.h>
 
-
-
 void initNVML(void)
 {
     unsigned int d;
